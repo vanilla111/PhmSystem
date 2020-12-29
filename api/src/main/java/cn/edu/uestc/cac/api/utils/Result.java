@@ -38,6 +38,10 @@ public class Result <T> {
         return new Result<>(data);
     }
 
+    public static Result<String> success() {
+        return success(Status.SUCCESS.getMsg());
+    }
+
     public static Result error(Status status) {
         return new Result(status);
     }

@@ -4,14 +4,11 @@ import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
-
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 
 /**
  * @author wang
  */
-@Component
 public class TimeMetaObjectHandler implements MetaObjectHandler {
 
     @Override

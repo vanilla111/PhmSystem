@@ -31,16 +31,22 @@ public class SystemIndicators {
 
     private Integer fileHandlesLimit;
 
+    @TableField(exist = false)
     private String osKernel;
 
+    @TableField(exist = false)
     private String osName;
 
+    @TableField(exist = false)
     private String osArch;
 
+    @TableField(exist = false)
     private String cpuName;
 
+    @TableField(exist = false)
     private Integer cpuCores;
 
+    @TableField(exist = false)
     private Integer cpuFreq;
 
     private Long ramTotal;
@@ -66,6 +72,9 @@ public class SystemIndicators {
 
     private Long tx;
 
+    @TableField(exist = false)
+    private String load;
+
     @TableField(value = "load_avg_1")
     private Float loadAvg1;
 
@@ -74,6 +83,8 @@ public class SystemIndicators {
 
     @TableField(value = "load_avg_15")
     private Float loadAvg15;
+
+    private Float loadMem;
 
     private Float loadCpu;
 

@@ -7,10 +7,49 @@ package cn.edu.uestc.cac.simulator.constants;
  * @date 2020-12-27
  */
 public class CommandConstants {
+    /*--------------------------全局命令常量-----------------------------------*/
+
+    /**
+     * 执行命令的方式：本地执行
+     */
+    public static final String LOCAL_SEND_METHOD = "LOCAL";
+
+    /**
+     * 执行命令的方式：SSH
+     */
+    public static final String SSH_SEND_METHOD = "SSH";
+
+    /**
+     * 执行命令的方式：HTTP
+     */
+    public static final String HTTP_SEND_METHOD = "HTTP";
+
+    /**
+     * blade命令
+     */
+    public static final String BLADE = "blade ";
+
+    /**
+     * curl 命令
+     */
+    public static final String CURL = "curl ";
+
+    /**
+     * 英文双引号
+     */
+    public static final String DOUBLE_QUOTES = "\"";
+
+    /**
+     * curl 用于替换空格
+     */
+    public static final String SPACE_REPLACER = "%20";
+
+    /*--------------------------CPU相关命令和参数常量-----------------------------------*/
+
     /**
      * CPU 相关命令
      */
-    public static final String BLADE_CREATE_CPU_LOAD = "blade create cpu load";
+    public static final String CREATE_CPU_LOAD = "create cpu load";
 
     /**
      * 设定运行时长，单位是秒，通用参数
@@ -85,13 +124,15 @@ public class CommandConstants {
     /**
      * CPU 相关命令的随机参数数组
      */
-    public static final String[] CPU_ARGS_ARRAY = {EMPTY_ARGS, CPU_COUNT, CPU_LIST, CPU_PERCENT};
+    public static final String[] CPU_ARGS_ARRAY = {CPU_PERCENT};
 
+    /*--------------------------磁盘相关命令和参数常量-----------------------------------*/
 
     /**
      * 磁盘相关命令
      */
-    public static final String BLADE_CREATE_DISK_BURN = "blade create disk burn";
+    public static final String CREATE_DISK_BURN = "create disk burn";
+
 
     /**
      * 指定提升磁盘 io 的目录，会作用于其所在的磁盘上，默认值是 /
@@ -118,11 +159,12 @@ public class CommandConstants {
      */
     public static final String[] DISK_ARGS_ARRAY = {READ, WRITE};
 
+    /*--------------------------内存相关命令和参数常量-----------------------------------*/
 
     /**
-     * 内存相关命令
+     * 内存相关命令（SSH）
      */
-    public static final String BLADE_CREATE_MEM_LOAD = "blade create mem load";
+    public static final String CREATE_MEM_LOAD = "create mem load";
 
     /**
      * 内存使用率，取值是 0 到 100 的整数
@@ -169,4 +211,5 @@ public class CommandConstants {
      * 内存相关命令的随机参数数组
      */
     public static final String[] MEM_ARGS_ARRAY = {MEM_PERCENT};
+
 }

@@ -27,7 +27,7 @@ public class CommandUtils {
      * @param password 密码
      * @return 登录成功返回连接，否则返回null
      */
-    public static Connection login(String ip, String user, String password) {
+    public static Connection sshLogin(String ip, String user, String password) {
         Connection connection = null;
 
         try {
@@ -54,7 +54,7 @@ public class CommandUtils {
      * @param command    需要执行的脚本或命令
      * @return 命令执行返回的结果，若执行失败返回空字符串
      */
-    public static String execute(Connection connection, String command) {
+    public static String sshExecute(Connection connection, String command) {
         String result = "";
 
         try {
@@ -65,8 +65,6 @@ public class CommandUtils {
                 session.execCommand(command);
                 // 解析执行结果
                 result = processStdout(session.getStdout());
-
-                System.out.println("result = " + result);
 
                 if (StringUtils.isBlank(result)) {
                     log.info("标准输出为空：connection = " + connection + ", command = " + command);
@@ -108,5 +106,32 @@ public class CommandUtils {
         }
 
         return buffer.toString();
+    }
+
+    public static String httpExecute(String command) {
+        BufferedReader br = null;
+        try {
+            Process p = Runtime.getRuntime().exec(command);
+            br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            String line;
+            StringBuilder sb = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return "";
     }
 }

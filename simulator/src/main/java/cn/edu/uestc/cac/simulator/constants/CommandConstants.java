@@ -12,17 +12,17 @@ public class CommandConstants {
     /**
      * 执行命令的方式：本地执行
      */
-    public static final String LOCAL_SEND_METHOD = "LOCAL";
+    public static final String LOCAL_MODE = "LOCAL";
 
     /**
      * 执行命令的方式：SSH
      */
-    public static final String SSH_SEND_METHOD = "SSH";
+    public static final String SSH_MODE = "SSH";
 
     /**
      * 执行命令的方式：HTTP
      */
-    public static final String HTTP_SEND_METHOD = "HTTP";
+    public static final String HTTP_MODE = "HTTP";
 
     /**
      * blade命令
@@ -30,14 +30,14 @@ public class CommandConstants {
     public static final String BLADE = "blade ";
 
     /**
-     * curl 命令
-     */
-    public static final String CURL = "curl ";
-
-    /**
      * 英文双引号
      */
     public static final String DOUBLE_QUOTES = "\"";
+
+    /**
+     * 英文逗号
+     */
+    public static final String COMMA = ",";
 
     /**
      * curl 用于替换空格
@@ -59,12 +59,12 @@ public class CommandConstants {
     /**
      * 运行时长的最小值，单位是秒
      */
-    public static final int TIMEOUT_MIN_VALUE = 10;
+    public static final int TIMEOUT_MIN_VALUE = 1;
 
     /**
      * 运行时长的最大值，单位是秒
      */
-    public static final int TIMEOUT_MAX_VALUE = 120;
+    public static final int TIMEOUT_MAX_VALUE = 2;
 
     /**
      * 空参，表示命令没有参数
@@ -87,26 +87,6 @@ public class CommandConstants {
     public static final int CPU_COUNT_MAX_VALUE = 2;
 
     /**
-     * 指定 CPU 满载的具体核，核索引从 0 开始 (0-3 or 1,3)
-     */
-    public static final String CPU_LIST = " --cpu-list ";
-
-    /**
-     * CPU 满载的具体核的最小值
-     */
-    public static final int CPU_LIST_MIN_VALUE = 0;
-
-    /**
-     * CPU 满载的具体核的最大值
-     */
-    public static final int CPU_LIST_MAX_VALUE = 1;
-
-    /**
-     * 英文逗号
-     */
-    public static final String COMMA = ",";
-
-    /**
      * 指定 CPU 负载百分比，取值在 0-100
      */
     public static final String CPU_PERCENT = " --cpu-percent ";
@@ -121,10 +101,6 @@ public class CommandConstants {
      */
     public static final int CPU_PERCENT_MAX_VALUE = 100;
 
-    /**
-     * CPU 相关命令的随机参数数组
-     */
-    public static final String[] CPU_ARGS_ARRAY = {CPU_PERCENT};
 
     /*--------------------------磁盘相关命令和参数常量-----------------------------------*/
 
@@ -206,10 +182,5 @@ public class CommandConstants {
      * 内存占用速率，单位是 MB/S，仅在 --mode ram 时生效
      */
     public static final String RATE = " --rate ";
-
-    /**
-     * 内存相关命令的随机参数数组
-     */
-    public static final String[] MEM_ARGS_ARRAY = {MEM_PERCENT};
 
 }

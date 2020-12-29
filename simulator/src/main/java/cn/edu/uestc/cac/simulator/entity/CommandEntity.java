@@ -1,7 +1,8 @@
 package cn.edu.uestc.cac.simulator.entity;
 
-import cn.edu.uestc.cac.simulator.base.SuperEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
+
+import cn.edu.uestc.cac.simulator.base.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("command")
-public class Command extends SuperEntity<Command> {
+public class CommandEntity extends SuperEntity<CommandEntity> {
     /**
      * 执行的命令
      */

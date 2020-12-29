@@ -11,6 +11,9 @@ import java.util.Set;
  * @date 2020-12-28
  */
 public class RandomUtils {
+
+    private static final Random random = new Random();
+
     /**
      * 随机生成 [a, b] 之间的整数，包含边界
      *
@@ -19,7 +22,6 @@ public class RandomUtils {
      * @return 随机生成的数字
      */
     public static int randomGenerateInteger(int min, int max) {
-        Random random = new Random();
         return random.nextInt(max - min + 1) + min;
     }
 

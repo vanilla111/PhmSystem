@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS `command`;
-CREATE TABLE `command` (
+DROP TABLE IF EXISTS `commandEntity`;
+CREATE TABLE `commandEntity` (
     `id` int(11) NOT NULL auto_increment COMMENT '唯一id',
-    `command` varchar(100) NOT NULL COMMENT '执行的命令',
+    `commandEntity` varchar(100) NOT NULL COMMENT '执行的命令',
     `code` char(3) default NULL COMMENT '结果状态码',
 	`success` varchar(5) default NULL COMMENT '结果是否成功',
 	`result` varchar(100) default NULL COMMENT '结果具体内容',

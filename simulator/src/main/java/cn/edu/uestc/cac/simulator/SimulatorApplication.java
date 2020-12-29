@@ -12,7 +12,14 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
+import cn.edu.uestc.cac.simulator.common.Command;
+import cn.edu.uestc.cac.simulator.common.CommandTypeEnum;
+import cn.edu.uestc.cac.simulator.common.LocalCommand;
+import cn.edu.uestc.cac.simulator.common.SshCommand;
 import cn.edu.uestc.cac.simulator.config.SimulatorConfig;
+import cn.edu.uestc.cac.simulator.constants.CommandConstants;
+import cn.edu.uestc.cac.simulator.runner.CommandExecutor;
+import cn.edu.uestc.cac.utils.Stopper;
 
 /**
  * 主启动类
@@ -40,19 +47,28 @@ public class SimulatorApplication {
     @PostConstruct
     public void run() throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
-        switch (this.simulatorConfig.getMode().trim().toLowerCase()) {
-            case "localhost": {
+        Command cpuCommand = null;
+        Command memCommand = null;
+        Command diskCommand = null;
+        switch (this.simulatorConfig.getMode().trim().toUpperCase()) {
+            case CommandConstants.LOCAL_MODE: {
                 // 本地执行模拟
                 logger.info("localhost mode");
+                cpuCommand = new LocalCommand(CommandTypeEnum.CPU);
+                memCommand = new LocalCommand(CommandTypeEnum.MEM);
+                diskCommand = new LocalCommand(CommandTypeEnum.DISK);
                 break;
             }
-            case "ssh": {
+            case CommandConstants.SSH_MODE: {
                 // 远程登陆到目标机器上执行
                 logger.info("ssh " + this.simulatorConfig.getUsername() + "@" + this.simulatorConfig.getSshHost()
                         + ":" + this.simulatorConfig.getSshHostPort());
+                cpuCommand = new SshCommand(CommandTypeEnum.CPU);
+                memCommand = new SshCommand(CommandTypeEnum.MEM);
+                diskCommand = new SshCommand(CommandTypeEnum.DISK);
                 break;
             }
-            case "http": {
+            case CommandConstants.HTTP_MODE: {
                 // 使用HTTP请求执行命令
                 logger.info("http mode");
                 break;
@@ -61,11 +77,19 @@ public class SimulatorApplication {
                 logger.error("配置错误");
             }
         }
-
+        CommandExecutor cpuExecutor = new CommandExecutor(cpuCommand);
+        CommandExecutor memExecutor = new CommandExecutor(memCommand);
+        CommandExecutor diskExecutor = new CommandExecutor(diskCommand);
+        executorService.execute(cpuExecutor);
+        executorService.execute(memExecutor);
+        executorService.execute(diskExecutor);
+        executorService.shutdown();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> close("shutdown hook")));
     }
 
     public void close(String cause) {
+        if (Stopper.isStopped()) return ;
+        Stopper.stop();
         logger.info("Simulator shutdown, cause: {}", cause);
     }
 

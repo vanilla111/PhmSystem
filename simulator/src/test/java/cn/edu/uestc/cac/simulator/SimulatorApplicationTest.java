@@ -2,14 +2,11 @@ package cn.edu.uestc.cac.simulator;
 
 import ch.ethz.ssh2.Connection;
 import cn.edu.uestc.cac.simulator.constants.CommandConstants;
-import cn.edu.uestc.cac.simulator.service.CommandService;
-import cn.edu.uestc.cac.simulator.service.impl.CommandServiceImpl;
+import cn.edu.uestc.cac.simulator.service.RandomGenerateCommand;
 import cn.edu.uestc.cac.simulator.utils.CommandUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,29 +24,23 @@ public class SimulatorApplicationTest {
         System.out.println("res = " + res);
     }
 
-    @Autowired
-    private CommandService commandService;
 
     @Test
     public void randomGenerateCPUCommandTest() {
-        for (int i = 0; i < 5; i++) {
-            System.out.println("i = " + i);
-            commandService.randomGenerateCPUCommand();
-            try {
-                Thread.sleep(CommandConstants.TIMEOUT_MAX_VALUE * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        new RandomGenerateCommand().randomGenerateCPUCommand(CommandConstants.SSH_SEND_METHOD);
+        new RandomGenerateCommand().randomGenerateCPUCommand(CommandConstants.HTTP_SEND_METHOD);
     }
 
     @Test
     public void randomGenerateDiskCommandTest() {
-        commandService.randomGenerateDiskCommand();
+//        new RandomGenerateCommand().randomGenerateDiskCommand(CommandConstants.SSH_SEND_METHOD);
+        new RandomGenerateCommand().randomGenerateDiskCommand(CommandConstants.HTTP_SEND_METHOD);
     }
 
     @Test
     public void randomGenerateMemCommandTest() {
-        commandService.randomGenerateMemCommand();
+//        new RandomGenerateCommand().randomGenerateMemCommand(CommandConstants.SSH_SEND_METHOD);
+        new RandomGenerateCommand().randomGenerateMemCommand(CommandConstants.HTTP_SEND_METHOD);
     }
+
 }

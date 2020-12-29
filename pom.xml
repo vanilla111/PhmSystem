@@ -6,6 +6,7 @@
     <modules>
         <module>dao</module>
         <module>common</module>
+        <module>simulator</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

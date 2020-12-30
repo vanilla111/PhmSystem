@@ -40,7 +40,7 @@ public class CommandConstants {
     public static final String COMMA = ",";
 
     /**
-     * curl 用于替换空格
+     * url替换空格
      */
     public static final String SPACE_REPLACER = "%20";
 
@@ -59,12 +59,12 @@ public class CommandConstants {
     /**
      * 运行时长的最小值，单位是秒
      */
-    public static final int TIMEOUT_MIN_VALUE = 1;
+    public static final int TIMEOUT_MIN_VALUE = 30;
 
     /**
      * 运行时长的最大值，单位是秒
      */
-    public static final int TIMEOUT_MAX_VALUE = 2;
+    public static final int TIMEOUT_MAX_VALUE = 60;
 
     /**
      * 空参，表示命令没有参数
@@ -94,12 +94,12 @@ public class CommandConstants {
     /**
      * CPU 负载百分比的最小值
      */
-    public static final int CPU_PERCENT_MIN_VALUE = 0;
+    public static final int CPU_PERCENT_MIN_VALUE = 10;
 
     /**
      * CPU 负载百分比的最大值
      */
-    public static final int CPU_PERCENT_MAX_VALUE = 100;
+    public static final int CPU_PERCENT_MAX_VALUE = 90;
 
 
     /*--------------------------磁盘相关命令和参数常量-----------------------------------*/
@@ -150,12 +150,12 @@ public class CommandConstants {
     /**
      * 内存使用率的最小值
      */
-    public static final int MEM_PERCENT_MIN_VALUE = 0;
+    public static final int MEM_PERCENT_MIN_VALUE = 10;
 
     /**
      * 内存使用率的最大值
      */
-    public static final int MEM_PERCENT_MAX_VALUE = 100;
+    public static final int MEM_PERCENT_MAX_VALUE = 90;
 
     /**
      * 内存占用模式，有 ram 和 cache 两种

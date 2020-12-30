@@ -1,12 +1,16 @@
 package cn.edu.uestc.cac.simulator.utils;
 
+import org.apache.commons.lang.StringUtils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
-
-import java.io.*;
 
 /**
  * 远程连接主机执行命令工具类
@@ -29,7 +33,6 @@ public class CommandUtils {
      */
     public static Connection sshLogin(String ip, String user, String password) {
         Connection connection = null;
-
         try {
             connection = new Connection(ip);
             connection.connect();
@@ -38,7 +41,6 @@ public class CommandUtils {
                 log.info("登录成功");
                 return connection;
             }
-
         } catch (IOException e) {
             log.error("登录失败");
             e.printStackTrace();
@@ -67,17 +69,16 @@ public class CommandUtils {
                 result = processStdout(session.getStdout());
 
                 if (StringUtils.isBlank(result)) {
-                    log.info("标准输出为空：connection = " + connection + ", command = " + command);
+                    log.info("标准输出为空：command = " + command);
                     result = processStdout(session.getStderr());
                 } else {
-                    log.info("命令执行成功：connection = " + connection + ", command = " + command);
+                    log.info("命令执行成功：command = " + command);
                 }
 
-                connection.close();
                 session.close();
             }
         } catch (IOException e) {
-            log.error("命令执行失败：connection = " + connection + ", command = " + command + ", " + e.getMessage());
+            log.error("命令执行失败：command = " + command + ", " + e.getMessage());
             e.printStackTrace();
         }
 

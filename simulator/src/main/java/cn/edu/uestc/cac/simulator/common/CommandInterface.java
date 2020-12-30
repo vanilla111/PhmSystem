@@ -5,4 +5,5 @@ package cn.edu.uestc.cac.simulator.common;
  */
 public interface CommandInterface {
     boolean execute();
+    void reset();
 }

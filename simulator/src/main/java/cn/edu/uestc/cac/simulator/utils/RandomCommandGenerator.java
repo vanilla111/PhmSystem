@@ -27,8 +27,9 @@ public class RandomCommandGenerator {
      *
      */
     public static void generateCpuCommand(Command command) {
-        StringBuilder cpuCommand = new StringBuilder(CommandConstants.CREATE_CPU_LOAD);
+        StringBuilder cpuCommand = new StringBuilder(command.getCommand());
 
+        cpuCommand.append(CommandConstants.CREATE_CPU_LOAD);
         // 随机生成 CPU 负载百分比
         int cpuPercent = RandomUtils.randomGenerateInteger(CommandConstants.CPU_PERCENT_MIN_VALUE,
                 CommandConstants.CPU_PERCENT_MAX_VALUE);
@@ -49,8 +50,9 @@ public class RandomCommandGenerator {
      *
      */
     public static void generateDiskCommand(Command command) {
-        StringBuilder diskCommand = new StringBuilder(CommandConstants.CREATE_DISK_BURN);
+        StringBuilder diskCommand = new StringBuilder(command.getCommand());
 
+        diskCommand.append(CommandConstants.CREATE_DISK_BURN);
         // 随机生成磁盘参数
         String[] diskArgs = CommandConstants.DISK_ARGS_ARRAY;
         int idx = RandomUtils.randomGenerateInteger(0, diskArgs.length - 1);
@@ -70,8 +72,9 @@ public class RandomCommandGenerator {
      *
      */
     public static void generateMemCommand(Command command) {
-        StringBuilder memCommand = new StringBuilder(CommandConstants.CREATE_MEM_LOAD);
+        StringBuilder memCommand = new StringBuilder(command.getCommand());
 
+        memCommand.append(CommandConstants.CREATE_MEM_LOAD);
         int memPercent = RandomUtils.randomGenerateInteger(CommandConstants.MEM_PERCENT_MIN_VALUE,
                 CommandConstants.MEM_PERCENT_MAX_VALUE);
         memCommand.append(CommandConstants.MEM_PERCENT);

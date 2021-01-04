@@ -14,7 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 import cn.edu.uestc.cac.simulator.common.Command;
 import cn.edu.uestc.cac.simulator.common.CommandTypeEnum;
-import cn.edu.uestc.cac.simulator.common.LocalCommand;
 import cn.edu.uestc.cac.simulator.common.SshCommand;
 import cn.edu.uestc.cac.simulator.config.SimulatorConfig;
 import cn.edu.uestc.cac.simulator.constants.CommandConstants;
@@ -50,22 +49,21 @@ public class SimulatorApplication {
         Command cpuCommand = null;
         Command memCommand = null;
         Command diskCommand = null;
+        Command memLeakCommand = null;
         switch (this.simulatorConfig.getMode().trim().toUpperCase()) {
             case CommandConstants.LOCAL_MODE: {
                 // 本地执行
                 logger.info("localhost mode");
-                cpuCommand = new LocalCommand(CommandTypeEnum.CPU);
-                memCommand = new LocalCommand(CommandTypeEnum.MEM);
-                diskCommand = new LocalCommand(CommandTypeEnum.DISK);
                 break;
             }
             case CommandConstants.SSH_MODE: {
                 // 远程登陆到目标机器上执行
                 logger.info("ssh " + this.simulatorConfig.getUsername() + "@" + this.simulatorConfig.getSshHost()
                         + ":" + this.simulatorConfig.getSshHostPort());
-                cpuCommand = new SshCommand(CommandTypeEnum.CPU, simulatorConfig);
+                //cpuCommand = new SshCommand(CommandTypeEnum.CPU, simulatorConfig);
                 memCommand = new SshCommand(CommandTypeEnum.MEM, simulatorConfig);
-                diskCommand = new SshCommand(CommandTypeEnum.DISK, simulatorConfig);
+                //diskCommand = new SshCommand(CommandTypeEnum.DISK, simulatorConfig);
+                memLeakCommand = new SshCommand(CommandTypeEnum.MEM_LEAK, simulatorConfig);
                 break;
             }
             case CommandConstants.HTTP_MODE: {
@@ -77,12 +75,9 @@ public class SimulatorApplication {
                 logger.error("配置错误");
             }
         }
-        CommandExecutor cpuExecutor = new CommandExecutor(cpuCommand);
-        CommandExecutor memExecutor = new CommandExecutor(memCommand);
-        CommandExecutor diskExecutor = new CommandExecutor(diskCommand);
-        executorService.execute(cpuExecutor);
-        executorService.execute(memExecutor);
-        executorService.execute(diskExecutor);
+        //executorService.execute(new CommandExecutor(cpuCommand));
+        executorService.execute(new CommandExecutor(memCommand));
+        executorService.execute(new CommandExecutor(memLeakCommand));
         executorService.shutdown();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> close("shutdown hook")));
     }

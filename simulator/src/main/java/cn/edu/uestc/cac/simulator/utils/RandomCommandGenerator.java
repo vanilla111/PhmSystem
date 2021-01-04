@@ -19,7 +19,14 @@ public class RandomCommandGenerator {
             case CPU: generateCpuCommand(command); break;
             case MEM: generateMemCommand(command); break;
             case DISK: generateDiskCommand(command); break;
+            case MEM_LEAK: generateMemLeakCommand(command); break;
         }
+    }
+
+    public static void generateMemLeakCommand(Command command) {
+        command.setTimeout(120);
+        command.setCommand(
+                command.getConfig().getErrorGeneratorCommandPath() + " >> /etc/collector/error_generator.log 2>&1 &");
     }
 
     /**
@@ -27,7 +34,7 @@ public class RandomCommandGenerator {
      *
      */
     public static void generateCpuCommand(Command command) {
-        StringBuilder cpuCommand = new StringBuilder(command.getCommand());
+        StringBuilder cpuCommand = new StringBuilder();
 
         cpuCommand.append(CommandConstants.CREATE_CPU_LOAD);
         // 随机生成 CPU 负载百分比
@@ -50,7 +57,7 @@ public class RandomCommandGenerator {
      *
      */
     public static void generateDiskCommand(Command command) {
-        StringBuilder diskCommand = new StringBuilder(command.getCommand());
+        StringBuilder diskCommand = new StringBuilder();
 
         diskCommand.append(CommandConstants.CREATE_DISK_BURN);
         // 随机生成磁盘参数
@@ -72,7 +79,7 @@ public class RandomCommandGenerator {
      *
      */
     public static void generateMemCommand(Command command) {
-        StringBuilder memCommand = new StringBuilder(command.getCommand());
+        StringBuilder memCommand = new StringBuilder();
 
         memCommand.append(CommandConstants.CREATE_MEM_LOAD);
         int memPercent = RandomUtils.randomGenerateInteger(CommandConstants.MEM_PERCENT_MIN_VALUE,

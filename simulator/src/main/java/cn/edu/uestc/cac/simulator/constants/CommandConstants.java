@@ -7,6 +7,7 @@ package cn.edu.uestc.cac.simulator.constants;
  * @date 2020-12-27
  */
 public class CommandConstants {
+
     /*--------------------------全局命令常量-----------------------------------*/
 
     /**
@@ -49,7 +50,7 @@ public class CommandConstants {
     /**
      * CPU 相关命令
      */
-    public static final String CREATE_CPU_LOAD = "create cpu load";
+    public static final String CREATE_CPU_LOAD = "blade create cpu load";
 
     /**
      * 设定运行时长，单位是秒，通用参数
@@ -59,17 +60,17 @@ public class CommandConstants {
     /**
      * 运行时长的最小值，单位是秒
      */
-    public static final int TIMEOUT_MIN_VALUE = 30;
+    public static final int TIMEOUT_MIN_VALUE = 60;
 
     /**
      * 运行时长的最大值，单位是秒
      */
-    public static final int TIMEOUT_MAX_VALUE = 60;
+    public static final int TIMEOUT_MAX_VALUE = 180;
 
     /**
      * 空参，表示命令没有参数
      */
-    public static final String EMPTY_ARGS = "";
+    public static final String EMPTY = "";
 
     /**
      * 指定 CPU 满载的个数
@@ -94,12 +95,12 @@ public class CommandConstants {
     /**
      * CPU 负载百分比的最小值
      */
-    public static final int CPU_PERCENT_MIN_VALUE = 10;
+    public static final int CPU_PERCENT_MIN_VALUE = 20;
 
     /**
      * CPU 负载百分比的最大值
      */
-    public static final int CPU_PERCENT_MAX_VALUE = 90;
+    public static final int CPU_PERCENT_MAX_VALUE = 50;
 
 
     /*--------------------------磁盘相关命令和参数常量-----------------------------------*/
@@ -107,7 +108,7 @@ public class CommandConstants {
     /**
      * 磁盘相关命令
      */
-    public static final String CREATE_DISK_BURN = "create disk burn";
+    public static final String CREATE_DISK_BURN = "blade create disk burn";
 
 
     /**
@@ -140,7 +141,7 @@ public class CommandConstants {
     /**
      * 内存相关命令（SSH）
      */
-    public static final String CREATE_MEM_LOAD = "create mem load";
+    public static final String CREATE_MEM_LOAD = "blade create mem load";
 
     /**
      * 内存使用率，取值是 0 到 100 的整数
@@ -155,7 +156,7 @@ public class CommandConstants {
     /**
      * 内存使用率的最大值
      */
-    public static final int MEM_PERCENT_MAX_VALUE = 90;
+    public static final int MEM_PERCENT_MAX_VALUE = 50;
 
     /**
      * 内存占用模式，有 ram 和 cache 两种

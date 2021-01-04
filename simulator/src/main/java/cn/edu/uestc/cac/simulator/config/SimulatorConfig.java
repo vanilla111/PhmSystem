@@ -34,4 +34,7 @@ public class SimulatorConfig {
 
     @Value("${simulator.chaosblade.ssh.password:111111}")
     private String password;
+
+    @Value("${simulator.errorgenerator.path:/usr/local/bin/ErrorGenerator}")
+    private String errorGeneratorCommandPath;
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import ch.ethz.ssh2.ChannelCondition;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
@@ -59,12 +60,26 @@ public class CommandUtils {
     public static String sshExecute(Connection connection, String command) {
         String result = "";
 
+        Session session = null;
         try {
             if (connection != null) {
                 // 打开一个会话
-                Session session = connection.openSession();
+                session = connection.openSession();
                 // 执行命令
                 session.execCommand(command);
+                int res = session.waitForCondition(ChannelCondition.STDERR_DATA
+                        | ChannelCondition.STDOUT_DATA
+                        | ChannelCondition.EOF, 3000);
+                if ((res & ChannelCondition.TIMEOUT) != 0) {
+                    log.info("命令运行超时：command = " + command);
+                    return "timeout";
+                }
+                if ((res & ChannelCondition.EOF) != 0) {
+                    if ((res & (ChannelCondition.STDOUT_DATA | ChannelCondition.STDERR_DATA)) == 0) {
+                        log.info("命令执行成功(返回为空)：command = " + command);
+                        return "success (empty response)";
+                    }
+                }
                 // 解析执行结果
                 result = processStdout(session.getStdout());
 
@@ -74,12 +89,14 @@ public class CommandUtils {
                 } else {
                     log.info("命令执行成功：command = " + command);
                 }
-
-                session.close();
+                log.info("返回结果：" + result);
             }
         } catch (IOException e) {
             log.error("命令执行失败：command = " + command + ", " + e.getMessage());
             e.printStackTrace();
+        } finally {
+            if (session != null)
+                session.close();
         }
 
         return result;

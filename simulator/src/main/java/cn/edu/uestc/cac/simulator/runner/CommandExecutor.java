@@ -28,23 +28,21 @@ public class CommandExecutor implements Runnable {
     public void run() {
         Random random = new Random();
         while (Stopper.isRunning()) {
-            // TODO 完善细节
-            RandomCommandGenerator.generate(command);
-            boolean randomExecute = true;
-            if (command.getCommandType() == CommandTypeEnum.DISK) {
-                if (random.nextInt(10) >= 2) {
-                    randomExecute = false;
-                }
-            }
-            if (randomExecute) {
-                boolean execResult = command.execute();
-            }
-            command.reset();
             try {
-                Thread.sleep(command.getTimeout() * 1000L);
-            } catch (InterruptedException e) {
-                logger.info("睡眠出现错误");
-                e.printStackTrace();
+                // TODO 完善细节
+                RandomCommandGenerator.generate(command);
+                boolean randomExecute = true;
+                if (command.getCommandType() == CommandTypeEnum.DISK) {
+                    if (random.nextInt(10) >= 2) {
+                        randomExecute = false;
+                    }
+                }
+                if (randomExecute) {
+                    command.execute();
+                }
+                Thread.sleep((command.getTimeout() + 5) * 1000L);
+            } catch (Exception e) {
+                logger.error("执行命令时发生错误", e);
             }
         }
     }

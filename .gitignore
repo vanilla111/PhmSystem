@@ -37,3 +37,4 @@ build/
 
 ### Properties ###
 datasource.properties
+simulator.properties

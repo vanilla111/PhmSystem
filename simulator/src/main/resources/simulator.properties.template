@@ -1,0 +1,6 @@
+simulator.run.mode=ssh
+simulator.chaosblade.ssh.host=192.168.1.192
+simulator.chaosblade.ssh.username=root
+simulator.chaosblade.ssh.password=111111
+
+simulator.errorgenerator.path=/root/ErrorGenerator/ErrorGenerator

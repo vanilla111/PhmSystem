@@ -32,8 +32,15 @@ public class CommandExecutor implements Runnable {
                 // TODO 完善细节
                 RandomCommandGenerator.generate(command);
                 boolean randomExecute = true;
+                int randomNum = random.nextInt(10);
                 if (command.getCommandType() == CommandTypeEnum.DISK) {
-                    if (random.nextInt(10) >= 2) {
+                    // 80%的概率不执行
+                    if (randomNum >= 2) {
+                        randomExecute = false;
+                    }
+                } else if (command.getCommandType() == CommandTypeEnum.MEM_LEAK) {
+                    // 50%的概率不执行
+                    if (randomNum >= 5) {
                         randomExecute = false;
                     }
                 }

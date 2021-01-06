@@ -24,7 +24,7 @@ public class RandomCommandGenerator {
     }
 
     public static void generateMemLeakCommand(Command command) {
-        command.setTimeout(120);
+        command.setTimeout(115);
         command.setCommand(
                 command.getConfig().getErrorGeneratorCommandPath() + " >> /etc/collector/error_generator.log 2>&1 &");
     }

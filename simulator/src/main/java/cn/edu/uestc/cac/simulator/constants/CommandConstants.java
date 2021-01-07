@@ -151,12 +151,12 @@ public class CommandConstants {
     /**
      * 内存使用率的最小值
      */
-    public static final int MEM_PERCENT_MIN_VALUE = 10;
+    public static final int MEM_PERCENT_MIN_VALUE = 30;
 
     /**
      * 内存使用率的最大值
      */
-    public static final int MEM_PERCENT_MAX_VALUE = 50;
+    public static final int MEM_PERCENT_MAX_VALUE = 100;
 
     /**
      * 内存占用模式，有 ram 和 cache 两种

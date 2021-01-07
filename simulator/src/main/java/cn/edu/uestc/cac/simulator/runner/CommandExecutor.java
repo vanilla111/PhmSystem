@@ -39,8 +39,8 @@ public class CommandExecutor implements Runnable {
                         randomExecute = false;
                     }
                 } else if (command.getCommandType() == CommandTypeEnum.MEM_LEAK) {
-                    // 50%的概率不执行
-                    if (randomNum >= 5) {
+                    // 80%的概率不执行
+                    if (randomNum >= 2) {
                         randomExecute = false;
                     }
                 }
